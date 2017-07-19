@@ -1,0 +1,64 @@
+
+td.audit_select {
+    width: 100px;
+}
+
+td:nth-child(1) {
+    padding: 10px;
+}
+
+select {
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    color: white;
+    padding-left: 34px;
+    font-size: 16px;
+}
+
+select .answer_1 {
+    background-color: green;
+}
+
+select .answer_2 {
+    background-color: red;
+}
+td.answer_1,td.answer_2,td.answer_3{
+    color: white;
+    padding-left: 34px;
+    font-size: 16px;
+    text-align: center
+}
+td.answer_1 > div{
+    background-color: green
+}
+td.answer_2 > div{
+    background-color: red;
+}
+td.answer_3 > div{
+    background-color: orange;
+}
+
+
+
+
+
+tr.polosa {
+    border: 1px solid rgba(191, 191, 191, 0.67);
+}
+
+th {
+    padding: 10px;
+}
+
+.head {
+    background-color: #fff;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+p.myinput{
+    text-align: end;
+    margin: 14px;
+}

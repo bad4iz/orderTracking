@@ -1,0 +1,25 @@
+{
+  "name": "exel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^3.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bad4iz/exel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bad4iz/exel/issues"
+  },
+  "homepage": "https://github.com/bad4iz/exel#readme"
+}

@@ -1,0 +1,276 @@
+﻿.contain_hc_slider{
+	width: 100%;
+	height: 500px;
+	position: relative;
+	overflow: hidden;
+}
+.slide_hc{
+	position: absolute;
+	top:0;
+	left:-100%;
+	width: 100%;
+	height: 100%;
+	animation-duration: 0.5s;
+	animation-fill-mode:forwards;
+}
+.contain_circ{
+	position: absolute;
+	bottom: 0;
+	padding: 5px 0;
+	text-align: center;
+	width: 100%;
+}
+.circ_hc{
+	position: relative;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border:2px solid white;
+	border-radius:50%;
+	cursor: pointer;
+}
+.circ_hc:not(:last-child){
+	margin-right:5px;
+}
+.contain_hc_slider>.active{
+	left:0;
+}
+.contain_circ>.active{
+	background: white;
+}
+.prev_hc{
+	background: url('/core/view/frame/slider/img/left.png')no-repeat;
+	left:10px;
+}
+.next_hc{
+	background: url('/core/view/frame/slider/img/right.png')no-repeat;
+	right:10px;
+}
+.prev_hc,
+.next_hc{
+	position: absolute;
+	width: 20px;
+	height: 60px;
+	background-size:20px 60px;
+	top:calc(50% - 30px);
+	cursor: pointer;
+}
+
+
+
+
+
+
+@media screen and  (max-width: 1600px){
+   .contain_hc_slider{
+	height:400px;
+   }
+}
+@media screen and  (max-width: 1200px){
+   .contain_hc_slider{
+	height:300px;
+   }
+}
+@media screen and  (max-width: 992px){
+   .contain_hc_slider{
+	height:400px;
+   }
+}
+@media screen and  (max-width: 768px){
+   .contain_hc_slider{
+	height:300px;
+   }
+}
+@media screen and  (max-width: 480px){
+   .contain_hc_slider{
+	height: 200px;
+   }
+}
+
+
+
+
+
+
+
+
+
+
+/*list - перелистывание*/
+@keyframes next_list{
+	0%{left: 0;}100%{left: -100%;}
+}
+@keyframes vis_list{
+	0%{left: 100%;}100%{left: 0;}
+}
+@keyframes next_back_list{
+	0%{left: -100%;}100%{left: 0;}
+}
+@keyframes vis_back_list{
+	0%{left: 0;}100%{left: 100%;}
+}
+.contain_hc_slider>.vis_list{
+	animation-name: vis_list;
+}
+.contain_hc_slider>.vis_back_list{
+	animation-name: vis_back_list;
+}
+.contain_hc_slider>.next_list{
+	animation-name: next_list;
+}
+.contain_hc_slider>.next_back_list{
+	animation-name: next_back_list;
+}
+/*scale - масштабирование*/
+@keyframes next_scale{
+	0%{left: 0;transform:scale(1);}100%{left: -100%;transform:scale(0);}
+}
+@keyframes vis_scale{
+	0%{left: 100%;transform:scale(0);}100%{left: 0;transform:scale(1);}
+}
+@keyframes next_back_scale{
+	0%{left: -100%;transform:scale(0);}100%{left: 0;transform:scale(1);}
+}
+@keyframes vis_back_scale{
+	0%{left: 0;transform:scale(1);}100%{left: 100%;transform:scale(0);}
+}
+.contain_hc_slider>.vis_scale{
+	animation-name: vis_scale;
+}
+.contain_hc_slider>.vis_back_scale{
+	animation-name: vis_back_scale;
+}
+.contain_hc_slider>.next_scale{
+	animation-name: next_scale;
+}
+.contain_hc_slider>.next_back_scale{
+	animation-name: next_back_scale;
+}
+/*opacity - плавный переход*/
+@keyframes next_opacity{
+	0%{left: 0;opacity:1;}100%{left: 0;opacity:0;}
+}
+@keyframes vis_opacity{
+	0%{left: 0;opacity:0;}100%{left: 0;opacity:1;}
+}
+@keyframes next_back_opacity{
+	0%{left: 0;opacity:0;}100%{left: 0;opacity:1;}
+}
+@keyframes vis_back_opacity{
+	0%{left: 0;opacity:1;}100%{left: 0;opacity:0;}
+}
+.contain_hc_slider>.vis_opacity{
+	animation-name: vis_opacity;
+}
+.contain_hc_slider>.vis_back_opacity{
+	animation-name: vis_back_opacity;
+}
+.contain_hc_slider>.next_opacity{
+	animation-name: next_opacity;
+}
+.contain_hc_slider>.next_back_opacity{
+	animation-name: next_back_opacity;
+}
+/*rotate - поворот*/
+@keyframes next_rotate{
+	0%{left: 0;z-index:-1;}100%{left:0;z-index:-1;}
+}
+@keyframes vis_rotate{
+	0%{left: 100%;transform:rotate(360deg);}100%{left: 0;transform:rotate(0deg);}
+}
+@keyframes next_back_rotate{
+	0%{left: 0;z-index:-1;}100%{left: 0;z-index:-1;}
+}
+@keyframes vis_back_rotate{
+	0%{left: 0;transform:rotate(0deg);}100%{left: 100%;transform:rotate(360deg);}
+}
+.contain_hc_slider>.vis_rotate{
+	animation-name: vis_rotate;
+}
+.contain_hc_slider>.vis_back_rotate{
+	animation-name: vis_back_rotate;
+}
+.contain_hc_slider>.next_rotate{
+	animation-name: next_rotate;
+}
+.contain_hc_slider>.next_back_rotate{
+	animation-name: next_back_rotate;
+}
+/*poker - карты*/
+@keyframes next_poker{
+	0%{left: 0;z-index:-1;}100%{left:0;z-index:-1;}
+}
+@keyframes vis_poker{
+	0%{left: 100%;}100%{left: 0;}
+}
+@keyframes next_back_poker{
+	0%{left: -100%;}100%{left: 0;}
+}
+@keyframes vis_back_poker{
+	0%{left: 0;z-index:-1;}100%{left: 0;z-index:-1;}
+}
+.contain_hc_slider>.vis_poker{
+	animation-name: vis_poker;
+}
+.contain_hc_slider>.vis_back_poker{
+	animation-name: vis_back_poker;
+}
+.contain_hc_slider>.next_poker{
+	animation-name: next_poker;
+}
+.contain_hc_slider>.next_back_poker{
+	animation-name: next_back_poker;
+}
+/*dinamic - динамичный*/
+@keyframes next_dinamic{
+	0%{left: 0;z-index:-1;}100%{left:0;z-index:-1;}
+}
+@keyframes vis_dinamic{
+	0%{left:0;transform:scale(2);opacity:0;}100%{left: 0;transform:scale(1);opacity:1;}
+}
+@keyframes next_back_dinamic{
+	0%{left: 0;z-index:-1;}100%{left:0;z-index:-1;}
+}
+@keyframes vis_back_dinamic{
+	0%{left:0;transform:scale(1);opacity:1;}100%{left: 0;transform:scale(2);opacity:0;}
+}
+.contain_hc_slider>.vis_dinamic{
+	animation-name: vis_dinamic;
+}
+.contain_hc_slider>.vis_back_dinamic{
+	animation-name: vis_back_dinamic;
+}
+.contain_hc_slider>.next_dinamic{
+	animation-name: next_dinamic;
+}
+.contain_hc_slider>.next_back_dinamic{
+	animation-name: next_back_dinamic;
+}
+/*share - шарик*/
+@keyframes next_share{
+	0%{left: 0;z-index:-1;}100%{left:0;z-index:-1;}
+}
+@keyframes vis_share{
+	0%{transform:rotate(1800deg);width:300px;height:300px;top:calc(50% - 150px);left:100%;border-radius:50%;}
+	50%{transform:rotate(0deg);width:300px;height:300px;top:calc(50% - 150px);left:calc(50% - 150px);border-radius:50%;}
+}
+@keyframes next_back_share{
+	0%{left: 0;z-index:-1;}100%{left:0;z-index:-1;}
+}
+@keyframes vis_back_share{
+	0%{left:0;}
+	50%{transform:rotate(0deg);width:300px;height:300px;top:calc(50% - 150px);left:calc(50% - 150px);border-radius:50%;}
+	100%{transform:rotate(1800deg);width:300px;height:300px;top:calc(50% - 150px);left:100%;border-radius:50%;}
+}
+.contain_hc_slider>.vis_share{
+	animation-name: vis_share;
+}
+.contain_hc_slider>.vis_back_share{
+	animation-name: vis_back_share;
+}
+.contain_hc_slider>.next_share{
+	animation-name: next_share;
+}
+.contain_hc_slider>.next_back_share{
+	animation-name: next_back_share;
+}
