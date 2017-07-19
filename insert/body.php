@@ -125,7 +125,7 @@ foreach ($mains as $main) {
         <!--   оприходован     -->
         <td>
             <div class="switchHide">
-                <input data-main_id='ggg' type="text" class="entryInput" value="iii" name="name" style="display:none;">
+                <input data-main_id='<?=  $main['id']  ?>' type="date" value="<?=$main['capitalized']?>" name="capitalized" style="display:none;">
                 <div> <?= $main['capitalized'] ? $main['capitalized'] : '......' ?> </div>
             </div>
         </td>

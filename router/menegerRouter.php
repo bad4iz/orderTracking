@@ -69,6 +69,15 @@ foreach ($_POST as $key => $value) {
             break;
 
 
+// оприодован
+        case 'setСapitalized':
+            $resp = json_decode($value);
+            print $mains->setСapitalized($resp->id, $resp->capitalized);
+            break;
+
+        case 'createItem':
+            print $mains->createItem();
+        //            print $value;
 
     }
 }

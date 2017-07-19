@@ -105,6 +105,19 @@ function setСommentsStatus(that) {
 }
 
 
+// оприходован
+function setСapitalized(that) {
+    const text = {
+        id: that.dataset.main_id,
+        capitalized: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setСapitalized=' + JSON.stringify(text), function () {
+        location.reload();
+    });
+}
+
+
 function addTrClick() {
     const button = document.getElementById('addTr');
     if (button) {
@@ -182,6 +195,14 @@ function switchHide() { // переключатель визиблhttp://78.24.4
                         setСommentsStatus(one);
                     }
                     break;
+                // оприходован
+                case 'capitalized':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setСapitalized(one);
+                    }
+                    break;
 
                 default :
             }
@@ -217,6 +238,7 @@ function selectedInput() { // переключатель визиблhttp://78.2
             case 'statusOfReceipt':
                 setStatusOfReceipt(toggle);
                 break;
+
 
             default :
         }

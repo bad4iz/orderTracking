@@ -88,5 +88,12 @@ class MainModel extends ExelDb {
         return $id;
     }
 
+    // оприходован
+    function setСapitalized($id, $capitalized){
+        $sql = "UPDATE $this->table SET `capitalized`='{$capitalized}' WHERE id=$id";
+        $id = $this->db->addAndGetId($sql);
+        return $id;
+    }
+
 }
 //UPDATE `main` SET `number_kp`=6,`date_kp`=7 WHERE id=1
