@@ -35,24 +35,6 @@ if ($_SESSION['access'] == 6) {
 }
 
 $userModel = new \exel\model\User();
-
-///////////////////////////////////////////////////////
-///   видно только мне
-/// ----------------------------------------------
-if ($_SESSION['auth_admin_login'] == "bad4iz") {
-    d($_SESSION);
-    d($mains);
-    d($tableAnalystArr);
-    ?>
-
-
-
-    <?
-}
-
-/// ----------------------------------------------
-///   видно только мне
-///////////////////////////////////////////////////////
 ?>
 
 
@@ -83,10 +65,9 @@ if ($_SESSION['auth_admin_login'] == "bad4iz") {
                 <header>
                     <h4>
                         <div style="text-align: end">
-                            <?
-                            if ($admin) { ?>
+
                                 <p>Добавить сторку <span id="addTr" class="badge badge-success"><i class="fa fa-plus"></i></span></p>
-                            <? } ?>
+
                         </div>
 
                         <!--                        <a href="?delete="> Выйти</a>-->
