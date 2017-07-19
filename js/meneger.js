@@ -31,6 +31,41 @@ function setProductName(that) {
         location.reload();
     });
 }
+// поставщик
+function setSupplier(that) {
+    const text = {
+        id: that.dataset.main_id,
+        supplier: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setSupplier=' + JSON.stringify(text), function() {
+        location.reload();
+    });
+}
+// стоимость товара по наклодной
+function setCost(that) {
+    const text = {
+        id: that.dataset.main_id,
+        cost: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setCost=' + JSON.stringify(text), function() {
+        location.reload();
+    });
+}
+
+
+// ориентировачная дата поставки
+function setEstimatedDeliveryDate(that) {
+    const text = {
+        id: that.dataset.main_id,
+        estimatedDeliveryDate: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setEstimatedDeliveryDate=' + JSON.stringify(text), function() {
+        location.reload();
+    });
+}
 
 
 function addTrClick() {
@@ -72,6 +107,31 @@ function switchHide() { // переключатель визиблhttp://78.24.4
                         one.style.display = 'none';
                         if (one.value !== two.textContent) {
                             setProductName(one);
+                        }
+                        break;
+
+                    // поставщик
+                    case 'supplier':
+                        two.style.display = '';
+                        one.style.display = 'none';
+                        if (one.value !== two.textContent) {
+                            setSupplier(one);
+                        }
+                        break;
+       // стоимость товара по наклодной
+                    case 'cost':
+                        two.style.display = '';
+                        one.style.display = 'none';
+                        if (one.value !== two.textContent) {
+                            setCost(one);
+                        }
+                        break;
+       // ориентировачная дата поставки
+                    case 'estimatedDeliveryDate':
+                        two.style.display = '';
+                        one.style.display = 'none';
+                        if (one.value !== two.textContent) {
+                            setEstimatedDeliveryDate(one);
                         }
                         break;
 

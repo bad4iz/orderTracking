@@ -46,6 +46,30 @@ class MainModel extends ExelDb {
         return $id;
     }
 
+    // поставщик
+   function setSupplier($id, $supplier){
+        $sql = "UPDATE $this->table SET `supplier`='$supplier' WHERE id=$id";
+        $id = $this->db->addAndGetId($sql);
+        return $id;
+    }
+ // стоимость товара по наклодной
+   function setCost($id, $cost){
+        $sql = "UPDATE $this->table SET `cost`='$cost' WHERE id=$id";
+        $id = $this->db->addAndGetId($sql);
+        return $id;
+    }
+ // ориентировачная дата поставки
+   function setEstimatedDeliveryDate($id, $estimatedDeliveryDate){
+        $sql = "UPDATE $this->table SET `estimatedDeliveryDate`='$estimatedDeliveryDate' WHERE id=$id";
+        $id = $this->db->addAndGetId($sql);
+        return $id;
+    }
+
+
+
+
+
+
 
 
 

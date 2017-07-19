@@ -32,38 +32,26 @@ foreach ($_POST as $key => $value) {
             $resp = json_decode($value);
             print $mains->setProductName($resp->id, $resp->productName);
             break;
-
-
-
-
-
-        case 'updateDesc':
+// поставщик
+        case 'setSupplier':
             $resp = json_decode($value);
-            print $mains->updateDesc($resp->id, $resp->desc);
-            //            print $value;
-            break;
-        case 'updateName':
-            $resp = json_decode($value);
-            print $mains->updateName($resp->id, $resp->name);
-            //            print $value;
-            break;
-        case 'updateDescKp':
-            $resp = json_decode($value);
-            print $mains->updateDeskKp($resp->id, $resp->descKp);
-            break;
-        case 'createItem':
-            print $mains->createItem();
-            //            print $value;
-            break;
-        case 'updateDeadline':
-            print $mains->updateDeadline($resp->id, $resp->deadline);
-//                        print $value;
+            print $mains->setSupplier($resp->id, $resp->supplier);
             break;
 
-        case 'updateSum':
+//стоимость товара по наклодной
+        case 'setCost':
             $resp = json_decode($value);
-            print $mains->updateSum($resp->id, $resp->sum);
+            print $mains->setCost($resp->id, $resp->cost);
             break;
+
+//ориентировачная дата поставки
+        case 'setEstimatedDeliveryDate':
+            $resp = json_decode($value);
+            print $mains->setEstimatedDeliveryDate($resp->id, $resp->estimatedDeliveryDate);
+            break;
+
+
+
     }
 }
 

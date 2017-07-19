@@ -53,26 +53,27 @@ foreach ($mains as $main) {
             </div>
         </td>
 
-        <!--        -->
+        <!--   поставцик     -->
         <td>
             <div class="switchHide">
-                <input data-main_id='ggg' type="text" class="entryInput" value="iii" name="name" style="display:none;">
+                <input data-main_id='<?=  $main['id'] ?>' type="text" class="entryInput" value="<?=$main['supplier']?>" name="supplier" style="display:none;">
                 <div> <?= $main['supplier'] ? $main['supplier'] : '......' ?> </div>
             </div>
         </td>
 
-        <!--        -->
+        <!--    стоимость товара по наклодной    -->
         <td>
             <div class="switchHide">
-                <input data-main_id='ggg' type="text" class="entryInput" value="iii" name="name" style="display:none;">
+                <input data-main_id='<?=  $main['id'] ?>' type="text" class="entryInput" value="<?=  $main['cost'] ?>" name="cost" style="display:none;">
                 <div> <?= $main['cost'] ? $main['cost'] : '......' ?> </div>
             </div>
         </td>
 
-        <!--        -->
+        <!--    ориентировачная дата поставки    -->
         <td>
             <div class="switchHide">
-                <input data-main_id='ggg' type="text" class="entryInput" value="iii" name="name" style="display:none;">
+                <input type="date" name="estimatedDeliveryDate"
+                       data-main_id="<?=  $main['id'] ?>"  style="display:none;"  value="<?=$main['estimatedDeliveryDate']?>"/>
                 <div> <?= $main['estimatedDeliveryDate'] ? $main['estimatedDeliveryDate'] : '......' ?> </div>
             </div>
         </td>
