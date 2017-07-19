@@ -15,7 +15,7 @@ function setInitiator(that) { // пишем в базу инициатора
         initiator: that.value
     };
     // console.log(text);
-    httpPost('order-tracking/menegerRouter', 'setInitiator=' + JSON.stringify(text), function() {
+    httpPost('order-tracking/menegerRouter', 'setInitiator=' + JSON.stringify(text), function () {
         location.reload();
     });
 }
@@ -27,7 +27,7 @@ function setProductName(that) {
         productName: that.value
     };
 
-    httpPost('order-tracking/menegerRouter', 'setProductName=' + JSON.stringify(text), function() {
+    httpPost('order-tracking/menegerRouter', 'setProductName=' + JSON.stringify(text), function () {
         location.reload();
     });
 }
@@ -38,7 +38,7 @@ function setSupplier(that) {
         supplier: that.value
     };
 
-    httpPost('order-tracking/menegerRouter', 'setSupplier=' + JSON.stringify(text), function() {
+    httpPost('order-tracking/menegerRouter', 'setSupplier=' + JSON.stringify(text), function () {
         location.reload();
     });
 }
@@ -49,7 +49,7 @@ function setCost(that) {
         cost: that.value
     };
 
-    httpPost('order-tracking/menegerRouter', 'setCost=' + JSON.stringify(text), function() {
+    httpPost('order-tracking/menegerRouter', 'setCost=' + JSON.stringify(text), function () {
         location.reload();
     });
 }
@@ -62,7 +62,7 @@ function setEstimatedDeliveryDate(that) {
         estimatedDeliveryDate: that.value
     };
 
-    httpPost('order-tracking/menegerRouter', 'setEstimatedDeliveryDate=' + JSON.stringify(text), function() {
+    httpPost('order-tracking/menegerRouter', 'setEstimatedDeliveryDate=' + JSON.stringify(text), function () {
         location.reload();
     });
 }
@@ -74,7 +74,32 @@ function setWarehouseNumber(that) {
         warehouseNumber: that.value
     };
 
-    httpPost('order-tracking/menegerRouter', 'setWarehouseNumber=' + JSON.stringify(text), function() {
+    httpPost('order-tracking/menegerRouter', 'setWarehouseNumber=' + JSON.stringify(text), function () {
+        location.reload();
+    });
+}
+
+// статус получения
+function setStatusOfReceipt(that) {
+    const text = {
+        id: that.dataset.main_id,
+        statusOfReceipt: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setStatusOfReceipt=' + JSON.stringify(text), function () {
+        location.reload();
+    });
+}
+
+
+// комертарии статуса
+function setСommentsStatus(that) {
+    const text = {
+        id: that.dataset.main_id,
+        сommentsStatus: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setСommentsStatus=' + JSON.stringify(text), function () {
         location.reload();
     });
 }
@@ -97,91 +122,107 @@ function switchHide() { // переключатель визиблhttp://78.24.4
     const toggles = document.querySelectorAll('.switchHide');
     toggles.forEach(toggle => {
         toggle.ondblclick = function () {
-            const [one, two] = toggle.children;
-            one.style.display = '';
-            two.style.display = 'none';
-            one.focus();
-            function job() {
-                console.log('job');
-                switch (one.name) {
-                    // дата заявки
-                    case 'setDateMain':
-                        two.style.display = '';
-                        one.style.display = 'none';
-                        if (one.value !== two.textContent) {
-                            setDateMain(one);
-                        }
-                        break;
+        const [one, two] = toggle.children;
+        one.style.display = '';
+        two.style.display = 'none';
+        one.focus();
+        function job() {
+            console.log('job');
+            switch (one.name) {
+                // дата заявки
+                case 'setDateMain':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setDateMain(one);
+                    }
+                    break;
 
-                    // наименование товара (общее)
-                    case 'productName':
-                        two.style.display = '';
-                        one.style.display = 'none';
-                        if (one.value !== two.textContent) {
-                            setProductName(one);
-                        }
-                        break;
+                // наименование товара (общее)
+                case 'productName':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setProductName(one);
+                    }
+                    break;
 
-                    // поставщик
-                    case 'supplier':
-                        two.style.display = '';
-                        one.style.display = 'none';
-                        if (one.value !== two.textContent) {
-                            setSupplier(one);
-                        }
-                        break;
-       // стоимость товара по наклодной
-                    case 'cost':
-                        two.style.display = '';
-                        one.style.display = 'none';
-                        if (one.value !== two.textContent) {
-                            setCost(one);
-                        }
-                        break;
-       // ориентировачная дата поставки
-                    case 'estimatedDeliveryDate':
-                        two.style.display = '';
-                        one.style.display = 'none';
-                        if (one.value !== two.textContent) {
-                            setEstimatedDeliveryDate(one);
-                        }
-                        break;
+                // поставщик
+                case 'supplier':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setSupplier(one);
+                    }
+                    break;
 
+                // стоимость товара по наклодной
+                case 'cost':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setCost(one);
+                    }
+                    break;
 
-                    default :
-                }
+                // ориентировачная дата поставки
+                case 'estimatedDeliveryDate':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setEstimatedDeliveryDate(one);
+                    }
+                    break;
+
+                // комертарии статуса
+                case 'commentsStatus':
+                    two.style.display = '';
+                    one.style.display = 'none';
+                    if (one.value !== two.textContent) {
+                        setСommentsStatus(one);
+                    }
+                    break;
+
+                default :
             }
+        }
 
-            document.onkeyup = function (event) {
-                const e = event || window.event;
-                if (e.keyCode === 13) {
-                    job();
-                }
-                return false;
-            };
-            one.onblur = job;
-            // one.onchange = job;
+        document.onkeyup = function (event) {
+            const e = event || window.event;
+            if (e.keyCode === 13) {
+                job();
+            }
+            return false;
         };
-    });
+        one.onblur = job;
+        // one.onchange = job;
+    };
+})
+    ;
 }
 
 function selectedInput() { // переключатель визиблhttp://78.24.41.47:8082
     const toggles = document.querySelectorAll('select');
     toggles.forEach(toggle => {
         toggle.onclick = function () {
-                switch (toggle.name) {
-                        // инициатор заявки
-                    case 'initiator':
-                            setInitiator(toggle);
-                    // номер склада
-                    case 'warehouseNumber':
-                            setWarehouseNumber(toggle);
-                        break;
+        switch (toggle.name) {
+            // инициатор заявки
+            case 'initiator':
+                setInitiator(toggle);
+            // номер склада
+            case 'warehouseNumber':
+                setWarehouseNumber(toggle);
+                break;
+            // статус получения
+            case 'statusOfReceipt':
+                setStatusOfReceipt(toggle);
+                break;
 
-                    default :
-                }
-        };
-    });
+            default :
+        }
+    };
+})
+    ;
 }
 
 

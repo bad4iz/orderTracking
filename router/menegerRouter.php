@@ -56,6 +56,18 @@ foreach ($_POST as $key => $value) {
             print $mains->setWarehouseNumber($resp->id, $resp->warehouseNumber);
             break;
 
+// статус получения
+        case 'setStatusOfReceipt':
+            $resp = json_decode($value);
+            print $mains->setStatusOfReceipt($resp->id, $resp->statusOfReceipt);
+            break;
+
+// комертарии статуса
+        case 'setСommentsStatus':
+            $resp = json_decode($value);
+            print $mains->setСommentsStatus($resp->id, $resp->сommentsStatus);
+            break;
+
 
 
     }

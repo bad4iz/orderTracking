@@ -100,7 +100,6 @@ foreach ($mains as $main) {
         <td>
             <select required="required"
                     data-main_id="<?=  $main['id'] ?>"
-
                     data-placeholder="Стус получения" class="col-xs-12 chzn-select"
                     name="statusOfReceipt">
                 <option value="<?= $main['statusOfReceipt'] ?>"></option>
@@ -117,7 +116,8 @@ foreach ($mains as $main) {
         <!--   коментарий статуса     -->
         <td>
             <div class="switchHide">
-                <input data-main_id='<?=  $main['id'] ?>' type="text" class="entryInput" value="<?=$main['commentsStatus']?>" name="commentsStatus" style="display:none;">
+                 <textarea  data-main_id="<?=  $main['id']  ?>" style="display:none;" type="text"
+                            class="entryInput"  name="commentsStatus"><?= $main['commentsStatus']  ?></textarea>
                 <div> <?= $main['commentsStatus'] ? $main['commentsStatus'] : '......' ?> </div>
             </div>
         </td>

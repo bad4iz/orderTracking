@@ -73,71 +73,19 @@ class MainModel extends ExelDb {
         return $id;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function addKp($id, $num){
-        $sql = "UPDATE $this->table SET `number_kp`='$num',`date_kp`=now() WHERE id=$id";
-        $id = $this->db->addAndGetId($sql);
-        return $id;
-    }
-    function updateMeneger($id, $desc){
-        $sql = "UPDATE  $this->table  SET `meneger_id`='$desc' WHERE id=$id";
-        $id = $this->db->addAndGetId($sql);
-        return $id;
-    }
-   function updateDesc($id, $desc){
-        $sql = "UPDATE $this->table SET `desc`='$desc' WHERE id=$id";
+ // статус получения
+   function setStatusOfReceipt($id, $statusOfReceipt){
+        $sql = "UPDATE $this->table SET `statusOfReceipt`='$statusOfReceipt' WHERE id=$id";
         $id = $this->db->addAndGetId($sql);
         return $id;
     }
 
-    function updateName($id, $name){
-        $sql = "UPDATE $this->table SET `name`='$name',`dateMain`=now() WHERE id=$id";
-        $id = $this->db->addAndGetId($sql);
-        return $id;
-    }
-    function updateDeskKp($id, $desc){
-        $sql = "UPDATE `main` SET `desc_kp`='$desc',`date_kp`=now() WHERE id=$id";
-        $id = $this->db->addAndGetId($sql);
-        return $id;
-    }
 
-    function updateDeadline($id, $desc){
-        $sql = "UPDATE $this->table SET `deadline`='$desc' WHERE id=$id";
-        print $sql;
+    // комертарии статуса
+    function setСommentsStatus($id, $сommentsStatus){
+        $sql = "UPDATE $this->table SET `commentsStatus`='{$сommentsStatus}' WHERE id=$id";
         $id = $this->db->addAndGetId($sql);
         return $id;
-    }
-    
-    function updateSum($id, $sum){
-        $sql = "UPDATE `main` SET `sum`='$sum' WHERE id=$id";
-        $id = $this->db->addAndGetId($sql);
-        return $id;
-    }
-
-    function getStatusOfReceipt(){
-        $sql ='SHOW COLUMNS FROM orderTracking LIKE "statusOfReceipt"';
-        $items = $this->db->selectAssoc($sql)[0][Type];
-
-        preg_match('/enum\((.*)\)$/', $items, $matches); //$type-просто возвращаеая строка которую надо распарсить // $matches - куда будет положен результаь
-        $vals = explode(',', $matches[1]);
-        return $vals;
     }
 
 }
