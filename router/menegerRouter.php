@@ -50,6 +50,12 @@ foreach ($_POST as $key => $value) {
             print $mains->setEstimatedDeliveryDate($resp->id, $resp->estimatedDeliveryDate);
             break;
 
+//номер склада
+        case 'setWarehouseNumber':
+            $resp = json_decode($value);
+            print $mains->setWarehouseNumber($resp->id, $resp->warehouseNumber);
+            break;
+
 
 
     }

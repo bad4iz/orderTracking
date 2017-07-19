@@ -81,40 +81,48 @@ foreach ($mains as $main) {
         <!--    Номер склада    -->
         <td>
             <select required="required"
+                    data-main_id="<?=  $main['id'] ?>"
                     data-placeholder="Номер склада" class="col-xs-12 chzn-select"
-                    name="initiator">
+                    name="warehouseNumber">
                 <option value="<?= $main['warehouseNumber'] ?>"></option>
                 <? foreach ($warehouse as $val) { ?>
-                    <option value="<?= $val['warehouseNumber'] ?>">
+                    <option value="<?= $val['warehouseNumber'] ?>"
+                        <? if($val['warehouseNumber'] ==  $main['warehouseNumber']) { echo 'selected'; }?>
+                    >
+
                         <?= $val['warehouseNumber'] ?>
                     </option>
                 <? } ?>
             </select>
         </td>
 
-        <!--        -->
+        <!--    статус получения    -->
         <td>
             <select required="required"
-                    data-placeholder="Выбрать инициатора" class="col-xs-12 chzn-select"
-                    name="initiator">
+                    data-main_id="<?=  $main['id'] ?>"
+
+                    data-placeholder="Стус получения" class="col-xs-12 chzn-select"
+                    name="statusOfReceipt">
                 <option value="<?= $main['statusOfReceipt'] ?>"></option>
                 <? foreach ($statusOfReceipt as $val) { ?>
-                    <option value="<?= $val['statusOfReceipt'] ?>">
+                    <option value="<?= $val['statusOfReceipt'] ?>"
+                        <? if($val['statusOfReceipt'] ==  $main['statusOfReceipt']) { echo 'selected'; }?>
+                    >
                         <?= $val['statusOfReceipt'] ?>
                     </option>
                 <? } ?>
             </select>
         </td>
 
-        <!--        -->
+        <!--   коментарий статуса     -->
         <td>
             <div class="switchHide">
-                <input data-main_id='ggg' type="text" class="entryInput" value="iii" name="name" style="display:none;">
+                <input data-main_id='<?=  $main['id'] ?>' type="text" class="entryInput" value="<?=$main['commentsStatus']?>" name="commentsStatus" style="display:none;">
                 <div> <?= $main['commentsStatus'] ? $main['commentsStatus'] : '......' ?> </div>
             </div>
         </td>
 
-        <!--        -->
+        <!--   оприходован     -->
         <td>
             <div class="switchHide">
                 <input data-main_id='ggg' type="text" class="entryInput" value="iii" name="name" style="display:none;">

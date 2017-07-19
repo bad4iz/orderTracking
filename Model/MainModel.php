@@ -66,6 +66,14 @@ class MainModel extends ExelDb {
     }
 
 
+ // номер склада
+   function setWarehouseNumber($id, $warehouseNumber){
+        $sql = "UPDATE $this->table SET `warehouseNumber`='$warehouseNumber' WHERE id=$id";
+        $id = $this->db->addAndGetId($sql);
+        return $id;
+    }
+
+
 
 
 

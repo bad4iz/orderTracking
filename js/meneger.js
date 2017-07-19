@@ -67,6 +67,18 @@ function setEstimatedDeliveryDate(that) {
     });
 }
 
+// номер склада
+function setWarehouseNumber(that) {
+    const text = {
+        id: that.dataset.main_id,
+        warehouseNumber: that.value
+    };
+
+    httpPost('order-tracking/menegerRouter', 'setWarehouseNumber=' + JSON.stringify(text), function() {
+        location.reload();
+    });
+}
+
 
 function addTrClick() {
     const button = document.getElementById('addTr');
@@ -135,6 +147,7 @@ function switchHide() { // переключатель визиблhttp://78.24.4
                         }
                         break;
 
+
                     default :
                 }
             }
@@ -160,6 +173,9 @@ function selectedInput() { // переключатель визиблhttp://78.2
                         // инициатор заявки
                     case 'initiator':
                             setInitiator(toggle);
+                    // номер склада
+                    case 'warehouseNumber':
+                            setWarehouseNumber(toggle);
                         break;
 
                     default :
