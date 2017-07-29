@@ -3,9 +3,15 @@ use exel\VIews\Select;
 
 $selectMeneger = [];
 
+
+
+
 foreach ($mains as $main) {
 
     $mainDate = explode(" ", $main['date'])[0];
+
+
+
 
     ?>
 

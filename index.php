@@ -12,6 +12,8 @@ use exel\model\MenegerModel;
 use exel\model\StatusOfReceipt;
 use exel\VIews\Select;
 
+$accessModel = new \exel\model\Access();
+
 $statusOfReceiptModel = new StatusOfReceipt();
 $statusOfReceipt = $statusOfReceiptModel->getAll();
 
@@ -57,7 +59,52 @@ $userModel = new \exel\model\User();
             </h2>
         </div>
     </div>
+    <? if ($_SESSION['access'] == 1) { ?>
+        <div class="panel-group" id="accordion2">
+            <div class="panel">
+                <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                        Администраторы таблицы
 
+                    </a>
+                </div>
+
+                <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
+                    <div class="panel-body">
+
+
+                        <select required="required"  data-main_id="<?=  $main['id'] ?>"
+                                data-placeholder="Выбрать админа" class=" chzn-select"
+                                name="initiator">
+                            <option value=""></option>
+                            <? foreach ($userModel->getUsers() as $val) { ?>
+                                <option value="<?= $val['name'] . ' ' . $val['femaly']  ?>"
+                                    <? if($val['name'] . ' ' . $val['femaly'] ==  $main['initiator']) { echo 'selected'; }?>
+
+                                >
+                                    <?= $val['name'] . ' ' . $val['femaly'] ?>
+                                </option>
+                            <? } ?>
+                        </select>
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#analyst">
+                        Внесение даты прихода с отправкой SMS
+                    </a>
+                </div>
+                <div id="analyst" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        фвафыафыва
+                    </div>
+                </div>
+            </div>
+        </div>
+    <? } ?>
     <div class="row">
 
         <div class="col-md-12">
@@ -66,7 +113,8 @@ $userModel = new \exel\model\User();
                     <h4>
                         <div style="text-align: end">
 
-                                <p>Добавить сторку <span id="addTr" class="badge badge-success"><i class="fa fa-plus"></i></span></p>
+                            <p>Добавить сторку <span id="addTr" class="badge badge-success"><i
+                                            class="fa fa-plus"></i></span></p>
 
                         </div>
 
@@ -90,7 +138,7 @@ $userModel = new \exel\model\User();
                         <thead>
                         <tr>
                             <th class="no-sort">#</th>
-                            <th  style="max-width: 100px !important; text-align: center;">Дата заявки</th>
+                            <th style="max-width: 100px !important; text-align: center;">Дата заявки</th>
                             <th style="text-align: center;">инициатор</th>
                             <th style="text-align: center;">наименование товара (общее)</th>
                             <th style="text-align: center;">поставщик</th>
@@ -114,7 +162,8 @@ $userModel = new \exel\model\User();
                 <div style="text-align: end">
                     <?
                     if ($admin) { ?>
-                        <p>Добавить строку <span id="addTr" class="badge badge-success"><i class="fa fa-plus"></i></span></p>
+                        <p>Добавить строку <span id="addTr" class="badge badge-success"><i
+                                        class="fa fa-plus"></i></span></p>
                     <? } ?>
                 </div>
             </section>
@@ -126,10 +175,12 @@ $userModel = new \exel\model\User();
 <script src="link/qw/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
-<script >
+<script>
     var table = $('#myTable').DataTable({
-        "pageLength": 100, "order": [[ 1, "desc" ]]
-    }).on( "draw", function () { switchHide();} );
+        "pageLength": 100, "order": [[1, "desc"]]
+    }).on("draw", function () {
+        switchHide();
+    });
 </script>
 
 <script src="orderTracking/js/lib/lib.js"></script>

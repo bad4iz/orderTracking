@@ -6,7 +6,7 @@ function myAutoLoad($className) {
     if ($ind) {
         $className = substr($className, $ind + 1);
     }
-    require_once $className . '.php';
+    require $className . '.php';
 }
 
 spl_autoload_register('myAutoLoad');
