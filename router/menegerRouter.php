@@ -79,18 +79,30 @@ foreach ($_POST as $key => $value) {
 
         case 'createItem':
             print $mains->createItem();
+            break;
+
         //            print $value;
 
 // admin
-        case 'admin':
-            $resp =($value);
-            print $accessModel
-            print $mains->setСapitalized($resp->id, $resp->capitalized);
+        case 'idAccess':
+            $idUser = $_POST['idUser'];
+            $idAccess = $_POST['idAccess'];
+
+            $accessModel->addAccessUser($idUser, $idAccess);
             break;
 
 
 
     }
 }
+foreach ($_GET as $key => $value) {
+    switch ($key) {
 
+        //установка создания создания заявки
+        case 'idUserAccess':
+            $accessModel->delete($value);
+            break;
+    }
+}
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 exit();

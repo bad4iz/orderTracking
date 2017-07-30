@@ -13,6 +13,8 @@ use exel\model\StatusOfReceipt;
 use exel\VIews\Select;
 
 $accessModel = new \exel\model\Access();
+$accessOrderTracking  = $accessModel->getAccessByUser($_SESSION['IDUser']);
+
 
 $statusOfReceiptModel = new StatusOfReceipt();
 $statusOfReceipt = $statusOfReceiptModel->getAll();
@@ -37,6 +39,8 @@ if ($_SESSION['access'] == 6) {
 }
 
 $userModel = new \exel\model\User();
+
+
 ?>
 
 
@@ -71,22 +75,26 @@ $userModel = new \exel\model\User();
 
                 <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
                     <div class="panel-body">
+                        <?
+                        $admins = $accessModel->getUsersByAccess(1);
+
+                        foreach ($admins as $admin) { ?>
+                            <p><?=$admin['femaly'] . ' ' . $admin['name']?> <a href="order-tracking/menegerRouter?idUserAccess=<?=$admin['idUser']?>">удалить</a> </p>
+                        <? } ?>
+
 
                         <form action="order-tracking/menegerRouter" method="post">
-                            <input type="hidden" value="2" name="admin" >
-                        <select required="required"  data-main_id="<?=  $main['id'] ?>"
-                                data-placeholder="Выбрать админа" class=" chzn-select"
-                                name="initiator">
-                            <option value=""></option>
-                            <? foreach ($userModel->getUsers() as $val) { ?>
-                                <option value="<?= $val['name'] . ' ' . $val['femaly']  ?>"
-                                    <? if($val['name'] . ' ' . $val['femaly'] ==  $main['initiator']) { echo 'selected'; }?>
-
-                                >
-                                    <?= $val['name'] . ' ' . $val['femaly'] ?>
-                                </option>
-                            <? } ?>
-                        </select>
+                            <input type="hidden" value="1" name="idAccess">
+                            <select required="required"
+                                    data-placeholder="Выбрать админа" class=" chzn-select"
+                                    name="idUser">
+                                <option value=""></option>
+                                <? foreach ($userModel->getUsers() as $val) { ?>
+                                    <option value="<?= $val['IDUser'] ?>" >
+                                        <?= $val['name'] . ' ' . $val['femaly'] ?>
+                                    </option>
+                                <? } ?>
+                            </select>
                             <input type="submit" value="add">
                         </form>
                     </div>
@@ -100,7 +108,28 @@ $userModel = new \exel\model\User();
                 </div>
                 <div id="analyst" class="panel-collapse collapse">
                     <div class="panel-body">
-                        фвафыафыва
+                        <?
+                        $userSms = $accessModel->getUsersByAccess(2);
+
+                        foreach ($userSms as $item) { ?>
+                            <p><?=$item['femaly'] . ' ' . $item['name']?> <a href="order-tracking/menegerRouter?idUserAccess=<?=$item['idUser']?>">удалить</a> </p>
+                        <? } ?>
+
+
+                        <form action="order-tracking/menegerRouter" method="post">
+                            <input type="hidden" value="2" name="idAccess">
+                            <select required="required"
+                                    data-placeholder="Выбрать" class=" chzn-select"
+                                    name="idUser">
+                                <option value=""></option>
+                                <? foreach ($userModel->getUsers() as $val) { ?>
+                                    <option value="<?= $val['IDUser'] ?>" >
+                                        <?= $val['name'] . ' ' . $val['femaly'] ?>
+                                    </option>
+                                <? } ?>
+                            </select>
+                            <input type="submit" value="add">
+                        </form>
                     </div>
                 </div>
             </div>
