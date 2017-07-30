@@ -72,7 +72,8 @@ $userModel = new \exel\model\User();
                 <div id="collapseOne" class="panel-collapse collapse" style="height: auto;">
                     <div class="panel-body">
 
-
+                        <form action="order-tracking/menegerRouter" method="post">
+                            <input type="hidden" value="2" name="admin" >
                         <select required="required"  data-main_id="<?=  $main['id'] ?>"
                                 data-placeholder="Выбрать админа" class=" chzn-select"
                                 name="initiator">
@@ -86,8 +87,8 @@ $userModel = new \exel\model\User();
                                 </option>
                             <? } ?>
                         </select>
-
-                        
+                            <input type="submit" value="add">
+                        </form>
                     </div>
                 </div>
             </div>

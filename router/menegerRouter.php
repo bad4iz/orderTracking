@@ -12,6 +12,8 @@ $post = $_POST;
 
 $mains = new MainModel();
 
+$accessModel = new \exel\model\Access();
+
 foreach ($_POST as $key => $value) {
     $resp = json_decode($value);
 
@@ -78,6 +80,15 @@ foreach ($_POST as $key => $value) {
         case 'createItem':
             print $mains->createItem();
         //            print $value;
+
+// admin
+        case 'admin':
+            $resp =($value);
+            print $accessModel
+            print $mains->setСapitalized($resp->id, $resp->capitalized);
+            break;
+
+
 
     }
 }
