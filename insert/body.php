@@ -92,7 +92,7 @@ foreach ($mains as $main) {
         </td>
 
         <!--    стоимость товара по наклодной    -->
-        <td>
+        <td style=" text-align: center;">
             <? if ($accessOrderTracking == 1) { ?>
                 <div class="switchHide">
                     <input data-main_id='<?= $main['id'] ?>' type="text" class="entryInput" value="<?= $main['cost'] ?>"
