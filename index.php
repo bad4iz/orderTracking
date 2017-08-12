@@ -150,9 +150,10 @@ $userModel = new \exel\model\User();
             <div class="panel-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
                    href="#collapseBringOnCharge">
-                    Фильтр по датам
+                    Выборка по датам
                 </a>
             </div>
+
 
             <div id="collapseBringOnCharge" class="panel-collapse collapse" style="height: auto;">
                 <div class="panel-body">
@@ -197,6 +198,53 @@ $userModel = new \exel\model\User();
 
                             <div class="col-md-4" style="margin: auto; float: none">
                                 <button class="btn btn-lg btn-warning btn-block" onclick="resetRangeСapitalized()">
+                                    Сбросить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                   href="#collapseCost">
+                    Выборка по стоимости
+                </a>
+            </div>
+            <div id="collapseCost" class="panel-collapse collapse" style="height: auto;">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <fieldset id="rangeCost">
+                                <div class="control-group">
+                                    <label class="control-label " for="tooltip-enabled">Минимальное число</label>
+                                    <div class="controls form-group">
+                                        <div class="col-sm-5">
+                                            <input type="number" id="minCost"
+                                                   class="form-control"
+                                                   data-placement="top"
+                                                   data-original-title="введите тут минимальное число"
+                                                   placeholder="Минимальное число"></div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label " for="tooltip-enabled">Максимальное число</label>
+                                    <div class="controls form-group">
+                                        <div class="col-sm-5">
+                                            <input type="number" id="maxCost"
+                                                   class="form-control"
+                                                   data-placement="top"
+                                                   data-original-title="введите тут максимальное число"
+                                                   placeholder="Максимальное число"></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="col-md-4" style="margin: auto; float: none">
+                                <button class="btn btn-lg btn-warning btn-block" onclick="resetDate()">
                                     Сбросить
                                 </button>
                             </div>
@@ -519,5 +567,36 @@ $userModel = new \exel\model\User();
             $.fn.dataTable.ext.search.pop();
         }
     });
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    /////////////     по стоимости
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            console.log('cost');
+            var min = parseInt( $('#minCost').val(), 10 );
+            var max = parseInt( $('#maxCost').val(), 10 );
+            var age = parseFloat( data[5] ) || 0; // use data for the age column
+
+            if ( ( isNaN( min ) && isNaN( max ) ) ||
+                ( isNaN( min ) && age <= max ) ||
+                ( min <= age   && isNaN( max ) ) ||
+                ( min <= age   && age <= max ) )
+            {
+                return true;
+            }
+            return false;
+        }
+    );
+
+
+        // Event listener to the two range filtering inputs to redraw on input
+        $('#minCost, #maxCost').keyup( function() {
+            console.log('key');
+
+            table.draw();
+        } );
+
 
 </script>';
