@@ -13,7 +13,7 @@ use exel\model\StatusOfReceipt;
 use exel\VIews\Select;
 
 $accessModel = new \exel\model\Access();
-$accessOrderTracking  = $accessModel->getAccessByUser($_SESSION['IDUser']);
+$accessOrderTracking = $accessModel->getAccessByUser($_SESSION['IDUser']);
 
 
 $statusOfReceiptModel = new StatusOfReceipt();
@@ -66,6 +66,8 @@ $userModel = new \exel\model\User();
     <? if ($_SESSION['access'] == 1) { ?>
         <div class="panel-group" id="accordion2">
             <div class="panel">
+
+
                 <div class="panel-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
                         Администраторы таблицы
@@ -79,7 +81,9 @@ $userModel = new \exel\model\User();
                         $admins = $accessModel->getUsersByAccess(1);
 
                         foreach ($admins as $admin) { ?>
-                            <p><?=$admin['femaly'] . ' ' . $admin['name']?> <a href="order-tracking/menegerRouter?idUserAccess=<?=$admin['idUser']?>">удалить</a> </p>
+                            <p><?= $admin['femaly'] . ' ' . $admin['name'] ?> <a
+                                        href="order-tracking/menegerRouter?idUserAccess=<?= $admin['idUser'] ?>">удалить</a>
+                            </p>
                         <? } ?>
 
 
@@ -90,7 +94,7 @@ $userModel = new \exel\model\User();
                                     name="idUser">
                                 <option value=""></option>
                                 <? foreach ($userModel->getUsers() as $val) { ?>
-                                    <option value="<?= $val['IDUser'] ?>" >
+                                    <option value="<?= $val['IDUser'] ?>">
                                         <?= $val['name'] . ' ' . $val['femaly'] ?>
                                     </option>
                                 <? } ?>
@@ -112,7 +116,9 @@ $userModel = new \exel\model\User();
                         $userSms = $accessModel->getUsersByAccess(2);
 
                         foreach ($userSms as $item) { ?>
-                            <p><?=$item['femaly'] . ' ' . $item['name']?> <a href="order-tracking/menegerRouter?idUserAccess=<?=$item['idUser']?>">удалить</a> </p>
+                            <p><?= $item['femaly'] . ' ' . $item['name'] ?> <a
+                                        href="order-tracking/menegerRouter?idUserAccess=<?= $item['idUser'] ?>">удалить</a>
+                            </p>
                         <? } ?>
 
 
@@ -123,7 +129,7 @@ $userModel = new \exel\model\User();
                                     name="idUser">
                                 <option value=""></option>
                                 <? foreach ($userModel->getUsers() as $val) { ?>
-                                    <option value="<?= $val['IDUser'] ?>" >
+                                    <option value="<?= $val['IDUser'] ?>">
                                         <?= $val['name'] . ' ' . $val['femaly'] ?>
                                     </option>
                                 <? } ?>
@@ -135,6 +141,53 @@ $userModel = new \exel\model\User();
             </div>
         </div>
     <? } ?>
+
+
+    <!--    //\///////////////////////   диапазон \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+    <div class="panel-group" id="accordion2">
+        <div class="panel">
+
+            <div class="panel-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
+                   href="#collapseBringOnCharge">
+                    Фильтр по датам
+                </a>
+            </div>
+
+            <div id="collapseBringOnCharge" class="panel-collapse collapse" style="height: auto;">
+                <div class="panel-body">
+                    <section class=" widget col-md-4">
+                        <header>
+                            <h4>
+                                Дата заявки
+                            </h4>
+                        </header>
+                        <div id="date_rangeDate"></div>
+                    </section>
+
+                    <section class=" widget col-md-4">
+                        <header>
+                            <h4>
+                                Ориентировочная дата поставки
+                            </h4>
+                        </header>
+                        <div id="date_rangeIndicativeDate"></div>
+                    </section>
+
+                        <div class="col-md-3" style="margin: auto; float: none">
+                            <button class="btn btn-lg btn-warning btn-block" onclick="resetDateIndicativeDate()">
+                                Сбросить
+                            </button>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--    //\///////////////////////  ч диапазон  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+
+    <div class="split"></div>
+
     <div class="row">
 
         <div class="col-md-12">
@@ -206,11 +259,7 @@ $userModel = new \exel\model\User();
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
 <script>
-    var table = $('#myTable').DataTable({
-        "pageLength": 100, "order": [[1, "desc"]]
-    }).on("draw", function () {
-        switchHide();
-    });
+
 </script>
 
 <script src="orderTracking/js/lib/lib.js"></script>
@@ -257,4 +306,92 @@ $userModel = new \exel\model\User();
 <!-- page specific -->
 <script src="/link/js/forms-elemets.js"></script>
 
+<!--////////////////////////////////////////////////////-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    -->  <!--подключение вызывает конфликт-->
+<script src="link/qw/jquery-ui.min.js"></script>
+<script src="https://rawgit.com/Artemeey/5ebc39370e568c34f03dce1639cabee8/raw/8de40b26479c406ee9cd6f9b4b3f4ad05370a024/jquery.datepicker.extension.range.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+<script>
+
+    var table = $('#myTable').DataTable({
+        "pageLength": 100, "order": [[1, "desc"]]
+    }).on("draw", function () {
+        switchHide();
+    });
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                       ////     //////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////
+         //       ///      //    ////////////////////////////////////////////////////////////////////////////////////
+      //        ///       //     /////////////////////////////////////////////////////////////////////////////////////
+     //       ///      //     ///////////////////////////////////////////////////////////////////////////////////////
+      ////////////////        ///////////////////////////////////////////////////////////////////////////////////////
+           ///                 ///////////////////////////////////////////////////////////////////////////////////////
+         ///            //////////////////////////////////////////////////////////////////////////////////////////////
+       ///                ////////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    function isUndef(x) {
+        return x === undefined;
+    }
+    //
+
+
+    ///////////////////////////////////////////////////////////
+    /////////                 Дата заявки
+    ///////////////////////////////////////////////////////////
+
+
+    var date_rangeDate = $('#date_rangeDate')
+    date_rangeDate.datepicker({
+        range: 'period', // режим - выбор периода
+        numberOfMonths: 2,
+        defaultDate: null, // сброс выбора по умолчанию
+        onSelect: function (dateText, inst, extensionRange, caused) { // метод выполняется когда изменился выбор дат
+            table.draw();
+        }
+    });
+    var extensionRange = date_rangeDate.datepicker("widget").data("datepickerExtensionRange"); //
+
+    $.fn.dataTable.ext.search.push(
+        function dateRange(settings, data, dataIndex) {
+        var minTmp = extensionRange.startDateText || " ";
+
+        var date = data[1].trim() || ""; // столбик для сравнения
+        var tmpMin = minTmp.split("/");
+
+        if(!(Array.isArray(tmpMin) && tmpMin.length>2) ) {return true}
+
+        var min = tmpMin[2] + "-" + tmpMin[0] + "-" + tmpMin[1];
+
+        var maxTmp = extensionRange.endDateText || " ";
+        var tmpMax = maxTmp.split("/");
+        var max = tmpMax[2] + "-" + tmpMax[0] + "-" + tmpMax[1];
+
+        if (( isUndef(min) && isUndef(max) ) || ( isUndef(min) && date <= max ) ||
+            ( min <= date && isUndef(max) ) || ( min <= date && date <= max )) {
+            return true;
+        }
+        return false;
+    });
+
+    function resetDate() {
+        extensionRange.startDateText = "01";
+        extensionRange.endDateText = "01/01/9999";
+        table.draw();
+    }
+
+    resetDate();
+
+</script>';
