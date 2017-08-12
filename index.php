@@ -243,8 +243,8 @@ $userModel = new \exel\model\User();
                                 </div>
                             </fieldset>
 
-                            <div class="col-md-4" style="margin: auto; float: none">
-                                <button class="btn btn-lg btn-warning btn-block" onclick="resetDate()">
+                            <div class="col-md-4" style=" float: none">
+                                <button class="btn btn-lg btn-warning btn-block" onclick="resetRangeCost()">
                                     Сбросить
                                 </button>
                             </div>
@@ -594,9 +594,12 @@ $userModel = new \exel\model\User();
         // Event listener to the two range filtering inputs to redraw on input
         $('#minCost, #maxCost').keyup( function() {
             console.log('key');
-
             table.draw();
         } );
-
+    function resetRangeCost(){
+        $('#minCost').val('');
+        $('#maxCost').val('');
+        table.draw();
+    }
 
 </script>';
