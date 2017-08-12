@@ -163,6 +163,12 @@ $userModel = new \exel\model\User();
                             </h4>
                         </header>
                         <div id="date_rangeDate"></div>
+
+                        <div class="col-md-3" style="margin: auto; float: none">
+                            <button class="btn btn-lg btn-warning btn-block" onclick="resetDate()">
+                                Сбросить
+                            </button>
+                        </div>
                     </section>
 
                     <section class=" widget col-md-4">
@@ -172,13 +178,14 @@ $userModel = new \exel\model\User();
                             </h4>
                         </header>
                         <div id="date_rangeIndicativeDate"></div>
-                    </section>
 
                         <div class="col-md-3" style="margin: auto; float: none">
-                            <button class="btn btn-lg btn-warning btn-block" onclick="resetDateIndicativeDate()">
+                            <button class="btn btn-lg btn-warning btn-block" onclick="resetIndicativeDate()">
                                 Сбросить
                             </button>
                         </div>
+                    </section>
+
                 </div>
             </div>
 
@@ -353,38 +360,44 @@ $userModel = new \exel\model\User();
     ///////////////////////////////////////////////////////////
 
 
-    var date_rangeDate = $('#date_rangeDate')
+    var date_rangeDate = $('#date_rangeDate');
     date_rangeDate.datepicker({
         range: 'period', // режим - выбор периода
         numberOfMonths: 2,
         defaultDate: null, // сброс выбора по умолчанию
         onSelect: function (dateText, inst, extensionRange, caused) { // метод выполняется когда изменился выбор дат
+
+            $.fn.dataTable.ext.search.push(
+                function mainRange(settings, data, dataIndex,  rowData, counter) {
+                console.log('date_rangeDate');
+                    var minTmp = extensionRange.startDateText || " ";
+
+                    var date = data[1].trim() || ""; // столбик для сравнения
+                    var tmpMin = minTmp.split("/");
+
+                    if(!(Array.isArray(tmpMin) && tmpMin.length>2) ) {return true}
+
+                    var min = tmpMin[2] + "-" + tmpMin[0] + "-" + tmpMin[1];
+
+                    var maxTmp = extensionRange.endDateText || " ";
+                    var tmpMax = maxTmp.split("/");
+                    var max = tmpMax[2] + "-" + tmpMax[0] + "-" + tmpMax[1];
+
+                    if (( isUndef(min) && isUndef(max) ) || ( isUndef(min) && date <= max ) ||
+                        ( min <= date && isUndef(max) ) || ( min <= date && date <= max )) {
+                        return true;
+                    }
+                    return false;
+                });
+
             table.draw();
+            $.fn.dataTable.ext.search.pop();
         }
     });
+
     var extensionRange = date_rangeDate.datepicker("widget").data("datepickerExtensionRange"); //
-
-    $.fn.dataTable.ext.search.push(
-        function dateRange(settings, data, dataIndex) {
-        var minTmp = extensionRange.startDateText || " ";
-
-        var date = data[1].trim() || ""; // столбик для сравнения
-        var tmpMin = minTmp.split("/");
-
-        if(!(Array.isArray(tmpMin) && tmpMin.length>2) ) {return true}
-
-        var min = tmpMin[2] + "-" + tmpMin[0] + "-" + tmpMin[1];
-
-        var maxTmp = extensionRange.endDateText || " ";
-        var tmpMax = maxTmp.split("/");
-        var max = tmpMax[2] + "-" + tmpMax[0] + "-" + tmpMax[1];
-
-        if (( isUndef(min) && isUndef(max) ) || ( isUndef(min) && date <= max ) ||
-            ( min <= date && isUndef(max) ) || ( min <= date && date <= max )) {
-            return true;
-        }
-        return false;
-    });
+    extensionRange.startDateText = "01";
+    extensionRange.endDateText = "01/01/9999";
 
     function resetDate() {
         extensionRange.startDateText = "01";
@@ -392,6 +405,37 @@ $userModel = new \exel\model\User();
         table.draw();
     }
 
-    resetDate();
+//    resetDate();
+////////////////////////////////////////////////////////
+    ///////   ориентировочная дата доставки
+    ///////////////////////////////////////////////////
+
+    var extensionRange = date_rangeDate.datepicker("widget").data("datepickerExtensionRange"); //
+    extensionRange.startDateText = "01";
+    extensionRange.endDateText = "01/01/9999";
+
+    function rangeIndicativeDate() {
+        extensionRange.startDateText = "01";
+        extensionRange.endDateText = "01/01/9999";
+        table.draw();
+    }
+
+    var date_rangeIndicativeDate = $('#date_rangeIndicativeDate');
+    date_rangeIndicativeDate.datepicker({
+        range: 'period', // режим - выбор периода
+        numberOfMonths: 2,
+//        defaultDate: null, // сброс выбора по умолчанию
+        onSelect: function (dateText, inst, extensionRange, caused) { // метод выполняется когда изменился выбор дат
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    console.log('кастомный сортировка');
+                    return true;
+                });
+            table.draw();
+            $.fn.dataTable.ext.search.pop();
+        }
+    });
+
+//
 
 </script>';
