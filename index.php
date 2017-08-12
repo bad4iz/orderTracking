@@ -156,36 +156,52 @@ $userModel = new \exel\model\User();
 
             <div id="collapseBringOnCharge" class="panel-collapse collapse" style="height: auto;">
                 <div class="panel-body">
-                    <section class=" widget col-md-4">
-                        <header>
-                            <h4>
-                                Дата заявки
-                            </h4>
-                        </header>
-                        <div id="date_rangeDate"></div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <header>
+                                <h4>
+                                    Дата заявки
+                                </h4>
+                            </header>
+                            <div id="date_rangeDate"></div>
 
-                        <div class="col-md-3" style="margin: auto; float: none">
-                            <button class="btn btn-lg btn-warning btn-block" onclick="resetDate()">
-                                Сбросить
-                            </button>
+                            <div class="col-md-4" style="margin: auto; float: none">
+                                <button class="btn btn-lg btn-warning btn-block" onclick="resetDate()">
+                                    Сбросить
+                                </button>
+                            </div>
                         </div>
-                    </section>
 
-                    <section class=" widget col-md-4">
-                        <header>
-                            <h4>
-                                Ориентировочная дата поставки
-                            </h4>
-                        </header>
-                        <div id="date_rangeIndicativeDate"></div>
+                        <div class=" col-md-4">
+                            <header>
+                                <h4>
+                                    Ориентировочная дата поставки
+                                </h4>
+                            </header>
+                            <div id="date_rangeIndicativeDate"></div>
 
-                        <div class="col-md-3" style="margin: auto; float: none">
-                            <button class="btn btn-lg btn-warning btn-block" onclick="resetIndicativeDate()">
-                                Сбросить
-                            </button>
+                            <div class="col-md-4" style="margin: auto; float: none">
+                                <button class="btn btn-lg btn-warning btn-block" onclick="resetRangeIndicativeDate()">
+                                    Сбросить
+                                </button>
+                            </div>
                         </div>
-                    </section>
 
+                        <div class=" col-md-4">
+                            <header>
+                                <h4>
+                                    Оприходован
+                                </h4>
+                            </header>
+                            <div id="date_rangeСapitalized"></div>
+
+                            <div class="col-md-4" style="margin: auto; float: none">
+                                <button class="btn btn-lg btn-warning btn-block" onclick="resetRangeСapitalized()">
+                                    Сбросить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -329,29 +345,27 @@ $userModel = new \exel\model\User();
     });
 
 
-
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                       ////     //////////////////////////////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////
-         //       ///      //    ////////////////////////////////////////////////////////////////////////////////////
-      //        ///       //     /////////////////////////////////////////////////////////////////////////////////////
-     //       ///      //     ///////////////////////////////////////////////////////////////////////////////////////
-      ////////////////        ///////////////////////////////////////////////////////////////////////////////////////
-           ///                 ///////////////////////////////////////////////////////////////////////////////////////
-         ///            //////////////////////////////////////////////////////////////////////////////////////////////
-       ///                ////////////////////////////////////////////////////////////////////////////////////////////
+    ////     //////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //       ///      //    ////////////////////////////////////////////////////////////////////////////////////
+    //        ///       //     /////////////////////////////////////////////////////////////////////////////////////
+    //       ///      //     ///////////////////////////////////////////////////////////////////////////////////////
+    ////////////////        ///////////////////////////////////////////////////////////////////////////////////////
+    ///                 ///////////////////////////////////////////////////////////////////////////////////////
+    ///            //////////////////////////////////////////////////////////////////////////////////////////////
+    ///                ////////////////////////////////////////////////////////////////////////////////////////////
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
     function isUndef(x) {
         return x === undefined;
     }
+
     //
 
 
@@ -368,14 +382,16 @@ $userModel = new \exel\model\User();
         onSelect: function (dateText, inst, extensionRange, caused) { // метод выполняется когда изменился выбор дат
 
             $.fn.dataTable.ext.search.push(
-                function mainRange(settings, data, dataIndex,  rowData, counter) {
-                console.log('date_rangeDate');
+                function mainRange(settings, data, dataIndex, rowData, counter) {
+                    console.log('date_rangeDate');
                     var minTmp = extensionRange.startDateText || " ";
 
                     var date = data[1].trim() || ""; // столбик для сравнения
                     var tmpMin = minTmp.split("/");
 
-                    if(!(Array.isArray(tmpMin) && tmpMin.length>2) ) {return true}
+                    if (!(Array.isArray(tmpMin) && tmpMin.length > 2)) {
+                        return true
+                    }
 
                     var min = tmpMin[2] + "-" + tmpMin[0] + "-" + tmpMin[1];
 
@@ -405,18 +421,18 @@ $userModel = new \exel\model\User();
         table.draw();
     }
 
-//    resetDate();
-////////////////////////////////////////////////////////
+    //    resetDate();
+    ////////////////////////////////////////////////////////
     ///////   ориентировочная дата доставки
     ///////////////////////////////////////////////////
 
-    var extensionRange = date_rangeDate.datepicker("widget").data("datepickerExtensionRange"); //
-    extensionRange.startDateText = "01";
-    extensionRange.endDateText = "01/01/9999";
+    var extensionRangeIndicative = date_rangeDate.datepicker("widget").data("datepickerExtensionRange"); //
+    extensionRangeIndicative.startDateText = "01";
+    extensionRangeIndicative.endDateText = "01/01/9999";
 
-    function rangeIndicativeDate() {
-        extensionRange.startDateText = "01";
-        extensionRange.endDateText = "01/01/9999";
+    function resetRangeIndicativeDate() {
+        extensionRangeIndicative.startDateText = "01";
+        extensionRangeIndicative.endDateText = "01/01/9999";
         table.draw();
     }
 
@@ -425,17 +441,83 @@ $userModel = new \exel\model\User();
         range: 'period', // режим - выбор периода
         numberOfMonths: 2,
 //        defaultDate: null, // сброс выбора по умолчанию
-        onSelect: function (dateText, inst, extensionRange, caused) { // метод выполняется когда изменился выбор дат
+        onSelect: function (dateText, inst, extensionRangeIndicative, caused) { // метод выполняется когда изменился выбор дат
             $.fn.dataTable.ext.search.push(
                 function (settings, data, dataIndex) {
                     console.log('кастомный сортировка');
-                    return true;
+                    var minTmp = extensionRangeIndicative.startDateText || " ";
+
+                    var date = data[6].trim() || ""; // столбик для сравнения
+                    var tmpMin = minTmp.split("/");
+
+                    if (!(Array.isArray(tmpMin) && tmpMin.length > 2)) {
+                        return true
+                    }
+
+                    var min = tmpMin[2] + "-" + tmpMin[0] + "-" + tmpMin[1];
+
+                    var maxTmp = extensionRangeIndicative.endDateText || " ";
+                    var tmpMax = maxTmp.split("/");
+                    var max = tmpMax[2] + "-" + tmpMax[0] + "-" + tmpMax[1];
+
+                    if (( isUndef(min) && isUndef(max) ) || ( isUndef(min) && date <= max ) ||
+                        ( min <= date && isUndef(max) ) || ( min <= date && date <= max )) {
+                        return true;
+                    }
+                    return false;
                 });
             table.draw();
             $.fn.dataTable.ext.search.pop();
         }
     });
 
-//
+    //
+    ////////////////////////////////////////////////////////
+    ///////   оприходован
+    ///////////////////////////////////////////////////
+
+    var extensionRangeСapitalized = $('#date_rangeСapitalized').datepicker("widget").data("datepickerExtensionRange"); //
+    extensionRangeСapitalized.startDateText = "01";
+    extensionRangeСapitalized.endDateText = "01/01/9999";
+
+    function resetRangeСapitalized() {
+        extensionRangeСapitalized.startDateText = "01";
+        extensionRangeСapitalized.endDateText = "01/01/9999";
+        table.draw();
+    }
+
+    $('#date_rangeСapitalized').datepicker({
+        range: 'period', // режим - выбор периода
+        numberOfMonths: 2,
+//        defaultDate: null, // сброс выбора по умолчанию
+        onSelect: function (dateText, inst, extensionRangeСapitalized, caused) { // метод выполняется когда изменился выбор дат
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    console.log('кастомный сортировка');
+                    var minTmp = extensionRangeСapitalized.startDateText || " ";
+
+                    var date = data[10].trim() || ""; // столбик для сравнения
+                    var tmpMin = minTmp.split("/");
+
+                    if (!(Array.isArray(tmpMin) && tmpMin.length > 2)) {
+                        return true
+                    }
+
+                    var min = tmpMin[2] + "-" + tmpMin[0] + "-" + tmpMin[1];
+
+                    var maxTmp = extensionRangeСapitalized.endDateText || " ";
+                    var tmpMax = maxTmp.split("/");
+                    var max = tmpMax[2] + "-" + tmpMax[0] + "-" + tmpMax[1];
+
+                    if (( isUndef(min) && isUndef(max) ) || ( isUndef(min) && date <= max ) ||
+                        ( min <= date && isUndef(max) ) || ( min <= date && date <= max )) {
+                        return true;
+                    }
+                    return false;
+                });
+            table.draw();
+            $.fn.dataTable.ext.search.pop();
+        }
+    });
 
 </script>';
